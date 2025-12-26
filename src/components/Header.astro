@@ -15,7 +15,7 @@ const navLinks = [
 ---
 
 <header
-    class="fixed top-0 left-0 w-full z-50 glass-dark border-b border-white/5"
+    class="fixed top-0 left-0 w-full z-[70] glass-dark border-b border-white/5"
 >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
@@ -105,33 +105,31 @@ const navLinks = [
         </div>
     </div>
 
-    <!-- Mobile Menu Overlay -->
-    <div
-        id="mobile-menu"
-        class="fixed inset-0 bg-void/95 backdrop-blur-2xl z-40 translate-x-full transition-transform duration-500 ease-expo pointer-events-none md:hidden"
-    >
-        <div
-            class="flex flex-col items-center justify-start pt-32 pb-12 h-full gap-6 overflow-y-auto"
-        >
-            {
-                navLinks.map((link) => (
-                    <a
-                        href={link.href}
-                        class="text-2xl font-heading font-black uppercase tracking-tighter text-white hover:text-volt transition-colors"
-                    >
-                        {link.name}
-                    </a>
-                ))
-            }
-            <ChargeButton
-                href={`${base}contact`}
-                class="mt-4 px-10 py-4 text-lg"
-            >
-                Get Your Free Pass
-            </ChargeButton>
-        </div>
-    </div>
 </header>
+
+<!-- Mobile Menu Overlay -->
+<div
+    id="mobile-menu"
+    class="fixed inset-0 bg-void/95 backdrop-blur-2xl z-[60] translate-x-full transition-transform duration-500 ease-expo pointer-events-none md:hidden"
+>
+    <div
+        class="flex flex-col items-center justify-start pt-32 pb-12 h-full gap-6 overflow-y-auto"
+    >
+        {
+            navLinks.map((link) => (
+                <a
+                    href={link.href}
+                    class="text-2xl font-heading font-black uppercase tracking-tighter text-white hover:text-volt transition-colors"
+                >
+                    {link.name}
+                </a>
+            ))
+        }
+        <ChargeButton href={`${base}contact`} class="mt-4 px-10 py-4 text-lg">
+            Get Your Free Pass
+        </ChargeButton>
+    </div>
+</div>
 
 <script>
     function setupMobileMenu() {
