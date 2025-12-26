@@ -110,12 +110,14 @@ const navLinks = [
         id="mobile-menu"
         class="fixed inset-0 bg-void/95 backdrop-blur-2xl z-40 translate-x-full transition-transform duration-500 ease-expo pointer-events-none md:hidden"
     >
-        <div class="flex flex-col items-center justify-center h-full gap-8">
+        <div
+            class="flex flex-col items-center justify-start pt-32 pb-12 h-full gap-6 overflow-y-auto"
+        >
             {
                 navLinks.map((link) => (
                     <a
                         href={link.href}
-                        class="text-3xl font-heading font-black uppercase tracking-tighter text-white hover:text-volt transition-colors"
+                        class="text-2xl font-heading font-black uppercase tracking-tighter text-white hover:text-volt transition-colors"
                     >
                         {link.name}
                     </a>
@@ -123,7 +125,7 @@ const navLinks = [
             }
             <ChargeButton
                 href={`${base}contact`}
-                class="mt-4 px-12 py-5 text-xl"
+                class="mt-4 px-10 py-4 text-lg"
             >
                 Get Your Free Pass
             </ChargeButton>
