@@ -1,0 +1,144 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ChargeButton from "../../components/ChargeButton.astro";
+import { pricingTiers } from "../../data/pricing";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<MainLayout
+    title="Pricing & Membership | PulseForge Gym"
+    description="Transparent membership options for elite performance training in Perth. Start with a 7-day free trial."
+>
+    <Header slot="header" />
+
+    <section class="pt-40 pb-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h1
+                    class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none"
+                >
+                    Invest in <span class="text-volt">Excellence</span>
+                </h1>
+                <p class="text-muted text-lg max-w-2xl mx-auto">
+                    No hidden fees. No long-term lock-ins. Just pure performance
+                    results for those who demand more from their training.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {
+                    pricingTiers.map((tier) => (
+                        <div
+                            class:list={[
+                                "relative p-10 rounded-sm border flex flex-col group transition-all duration-500 hover:scale-105 hover:bg-armor",
+                                tier.isPopular
+                                    ? "bg-armor border-volt/30 shadow-[0_0_40px_rgba(212,255,0,0.05)]"
+                                    : "bg-armor/50 border-white/5",
+                            ]}
+                        >
+                            {tier.isPopular && (
+                                <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 bg-volt text-void text-[10px] font-black uppercase tracking-[0.2em] rounded-full">
+                                    Elite Choice
+                                </span>
+                            )}
+
+                            <div class="mb-8">
+                                <h3 class="text-white font-heading font-black text-2xl uppercase tracking-tighter mb-2">
+                                    {tier.name}
+                                </h3>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-4xl font-black text-white">
+                                        {tier.price}
+                                    </span>
+                                    <span class="text-xs text-muted font-bold uppercase tracking-widest">
+                                        / {tier.period}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <ul class="space-y-4 mb-12 flex-grow">
+                                {tier.features.map((feature) => (
+                                    <li class="flex items-start gap-3">
+                                        <svg
+                                            class="w-5 h-5 text-flux flex-shrink-0"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2.5"
+                                                d="M5 13l4 4L19 7"
+                                            />
+                                        </svg>
+                                        <span class="text-sm text-muted group-hover:text-white/80 transition-colors uppercase tracking-tight">
+                                            {feature}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <ChargeButton
+                                href={`${base}contact`}
+                                variant={
+                                    tier.isPopular ? "primary" : "secondary"
+                                }
+                                class="w-full text-center"
+                            >
+                                {tier.cta}
+                            </ChargeButton>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-32 bg-void border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2
+                class="text-3xl font-black uppercase tracking-tighter mb-16 text-center"
+            >
+                Frequently <span class="text-flux">Asked</span>
+            </h2>
+            <div class="space-y-8">
+                {
+                    [
+                        {
+                            q: "Is the 7-day trial really free?",
+                            a: "Yes. Absolutely no payment details required up front. Just bring your ID and training gear.",
+                        },
+                        {
+                            q: "Can I cancel my membership anytime?",
+                            a: "Standard and Elite memberships require only 14 days notice for cancellation. We believe in results, not contracts.",
+                        },
+                        {
+                            q: "Do you have student or corporate rates?",
+                            a: "Yes. We offer specialized rates for full-time students and local Perth CBD businesses. Bring proof of ID/Employment for a quote.",
+                        },
+                        {
+                            q: "What should I bring to my first session?",
+                            a: "Towel, water, and appropriate training footwear. We provide specialized equipment for all programs.",
+                        },
+                    ].map((faq) => (
+                        <div class="p-6 bg-armor/30 border border-white/5 rounded-sm">
+                            <h4 class="text-white font-bold uppercase tracking-widest text-sm mb-4">
+                                {faq.q}
+                            </h4>
+                            <p class="text-muted text-sm leading-relaxed">
+                                {faq.a}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</MainLayout>

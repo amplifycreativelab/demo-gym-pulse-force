@@ -1,0 +1,143 @@
+---
+const base = import.meta.env.BASE_URL;
+
+const footerLinks = [
+    {
+        title: "Forge",
+        links: [
+            { name: "Programs", href: `${base}programs` },
+            { name: "Classes", href: `${base}classes` },
+            { name: "Trainers", href: `${base}trainers` },
+            { name: "Pricing", href: `${base}pricing` },
+        ],
+    },
+    {
+        title: "Company",
+        links: [
+            { name: "About Us", href: `${base}about` },
+            { name: "Contact", href: `${base}contact` },
+            { name: "Careers", href: "#" },
+            { name: "Privacy", href: `${base}privacy` },
+        ],
+    },
+];
+
+const areas = [
+    "Perth CBD",
+    "Subiaco",
+    "Leederville",
+    "Northbridge",
+    "Mount Lawley",
+    "West Perth",
+];
+---
+
+<footer class="bg-armor border-t border-white/5 pt-20 pb-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <!-- Brand & Description -->
+            <div class="md:col-span-2">
+                <a href={base} class="flex items-center gap-2 mb-6">
+                    <div
+                        class="w-8 h-8 bg-volt rounded-sm flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-5 h-5 text-void"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2.5"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <span
+                        class="font-heading font-black text-xl tracking-tighter uppercase"
+                    >
+                        Pulse<span class="text-volt">Forge</span>
+                    </span>
+                </a>
+                <p class="text-muted max-w-sm mb-8">
+                    The epicenter of elite performance training in Western
+                    Australia. We forge athletes though kinetic science and
+                    unrelenting intensity.
+                </p>
+                <div class="flex gap-4">
+                    <!-- Socials (Placeholders) -->
+                    {
+                        ["IG", "FB", "YT", "X"].map((social) => (
+                            <a
+                                href="#"
+                                class="w-10 h-10 rounded-sm border border-white/10 flex items-center justify-center text-xs font-bold hover:bg-volt hover:text-void transition-all"
+                            >
+                                {social}
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Links Grid -->
+            {
+                footerLinks.map((group) => (
+                    <div>
+                        <h4 class="font-heading font-bold text-white uppercase tracking-widest text-sm mb-6">
+                            {group.title}
+                        </h4>
+                        <ul class="space-y-4">
+                            {group.links.map((link) => (
+                                <li>
+                                    <a
+                                        href={link.href}
+                                        class="text-muted hover:text-volt transition-colors text-sm"
+                                    >
+                                        {link.name}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            }
+        </div>
+
+        <!-- Areas & Search -->
+        <div class="border-t border-white/5 pt-10 mb-10">
+            <h4
+                class="font-heading font-bold text-white uppercase tracking-widest text-xs mb-6"
+            >
+                Areas We Serve (Perth, WA)
+            </h4>
+            <div class="flex flex-wrap gap-x-6 gap-y-3">
+                {
+                    areas.map((area) => (
+                        <span class="text-muted text-xs hover:text-flux transition-colors cursor-default">
+                            {area}
+                        </span>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Bottom -->
+        <div
+            class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 gap-4"
+        >
+            <p class="text-muted text-xs">
+                &copy; {new Date().getFullYear()} PulseForge Performance Gym. All
+                rights reserved.
+            </p>
+            <div class="flex gap-8 text-xs text-muted">
+                <a href="#" class="hover:text-white transition-colors"
+                    >Terms of Service</a
+                >
+                <a href="#" class="hover:text-white transition-colors"
+                    >Cookie Policy</a
+                >
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,51 @@
+@reference "./global.css";
+
+/* Charge button conic-gradient hover animation */
+@keyframes charge-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.charge-effect::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: conic-gradient(from 0deg,
+            transparent 0deg,
+            transparent 280deg,
+            var(--color-volt) 360deg);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: charge-spin 1s linear infinite;
+    z-index: -1;
+}
+
+.charge-effect:hover::before {
+    opacity: 1;
+}
+
+/* Base styles for interactive elements */
+.charge-button {
+    @apply relative inline-flex items-center justify-center px-8 py-3 bg-volt text-void font-bold uppercase tracking-widest transition-all duration-200 active:scale-92 overflow-hidden;
+}
+
+.charge-button::after {
+    content: "";
+    @apply absolute inset-0 bg-white opacity-0 transition-opacity duration-100;
+    mix-blend-mode: overlay;
+}
+
+.charge-button:active::after {
+    @apply opacity-30;
+}
+
+/* Glass effect utilities */
+.glass-panel {
+    @apply backdrop-blur-xl bg-armor/60 border border-white/10;
+}

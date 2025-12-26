@@ -1,0 +1,157 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<MainLayout
+    title="Our Mission | PulseForge Gym"
+    description="Learn about the philosophy behind PulseForge Performance Gym. Perth's premier fitness destination."
+>
+    <Header slot="header" />
+
+    <section class="pt-40 pb-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div>
+                    <span
+                        class="text-volt font-black uppercase tracking-[0.4em] text-[10px] mb-4 block"
+                        >Est. 2024</span
+                    >
+                    <h1
+                        class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none"
+                    >
+                        The <span class="text-flux">Philosophy</span>
+                    </h1>
+                    <p class="text-muted text-lg mb-8 leading-relaxed">
+                        PulseForge wasn't born out of a desire for another 'box
+                        gym'. It was forged from a need for a high-intensity
+                        facility that combines scientific kinetic principles
+                        with a relentless pursuit of performance excellence.
+                    </p>
+                    <p class="text-muted text-lg mb-12 leading-relaxed">
+                        Located in the heart of Perth's western suburbs, we
+                        serve a community of athletes, professionals, and
+                        weekend warriors who refuse to settle for 'average'.
+                    </p>
+                    <div
+                        class="grid grid-cols-2 gap-8 border-t border-white/5 pt-12"
+                    >
+                        <div>
+                            <span
+                                class="text-white font-black text-3xl block mb-2 tracking-tighter"
+                                >PERTH CBD</span
+                            >
+                            <span
+                                class="text-[10px] text-muted font-black uppercase tracking-widest"
+                                >Main Facility</span
+                            >
+                        </div>
+                        <div>
+                            <span
+                                class="text-white font-black text-3xl block mb-2 tracking-tighter"
+                                >1200SQM+</span
+                            >
+                            <span
+                                class="text-[10px] text-muted font-black uppercase tracking-widest"
+                                >Training Surface</span
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div
+                        class="aspect-[4/5] bg-armor border border-white/5 rounded-sm overflow-hidden flex items-center justify-center relative"
+                    >
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-volt/10 via-transparent to-flux/10 opacity-50"
+                        >
+                        </div>
+                        <svg
+                            class="w-48 h-48 text-white opacity-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+
+                        <!-- Decorative label -->
+                        <div
+                            class="absolute bottom-10 right-10 flex flex-col items-end"
+                        >
+                            <span
+                                class="text-[10px] text-muted font-black uppercase tracking-widest"
+                                >PulseForge Headquarters</span
+                            >
+                            <span
+                                class="text-white font-black uppercase tracking-tighter text-xl underline decoration-volt decoration-2 underline-offset-4"
+                                >WEST PERTH</span
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Floating UI card -->
+                    <div
+                        class="absolute -top-12 -left-12 hidden xl:block p-8 glass-dark border border-white/10 max-w-xs"
+                    >
+                        <h4
+                            class="text-volt text-xs font-black uppercase tracking-widest mb-4"
+                        >
+                            Values
+                        </h4>
+                        <ul class="space-y-4">
+                            <li
+                                class="text-white text-sm font-bold uppercase tracking-tight"
+                            >
+                                01. Scientific Load
+                            </li>
+                            <li
+                                class="text-white text-sm font-bold uppercase tracking-tight"
+                            >
+                                02. Aggressive Discipline
+                            </li>
+                            <li
+                                class="text-white text-sm font-bold uppercase tracking-tight"
+                            >
+                                03. Adaptive Growth
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Statement -->
+    <section class="py-40 bg-void text-center relative overflow-hidden">
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] bg-volt/5 blur-[150px] rounded-full"
+        >
+        </div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <blockquote
+                class="text-3xl md:text-5xl font-black uppercase tracking-tighter italic leading-none mb-12"
+            >
+                "We do not train for aesthetics. We train for <span
+                    class="text-volt">capability</span
+                >. We do not forge bodies. We forge <span class="text-flux"
+                    >resilience</span
+                >."
+            </blockquote>
+            <footer
+                class="text-muted text-xs font-black uppercase tracking-[0.4em]"
+            >
+                — Alex Vane, Founder
+            </footer>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</MainLayout>

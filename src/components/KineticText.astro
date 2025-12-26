@@ -1,0 +1,86 @@
+---
+interface Props {
+    words: string[];
+    class?: string;
+}
+
+const { words, class: className = "" } = Astro.props;
+---
+
+<div
+    class:list={[
+        "kinetic-text-container overflow-hidden inline-flex items-baseline",
+        className,
+    ]}
+>
+    <span class="relative block">
+        <!-- Spacer to set width/height based on longest word -->
+        <span class="invisible select-none" aria-hidden="true">
+            {words.reduce((a, b) => (a.length > b.length ? a : b), "")}
+        </span>
+
+        {
+            words.map((word, i) => (
+                <span
+                    class="kinetic-word absolute left-0 top-0 w-full text-center opacity-0 transition-all duration-500 whitespace-nowrap"
+                    data-index={i}
+                >
+                    {word}
+                </span>
+            ))
+        }
+    </span>
+</div>
+
+<style>
+    .kinetic-word[data-active="true"] {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .kinetic-word[data-active="false"] {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    .kinetic-word[data-active="prev"] {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+</style>
+
+<script>
+    function initKineticText() {
+        const containers = document.querySelectorAll(".kinetic-text-container");
+
+        containers.forEach((container) => {
+            const words = container.querySelectorAll(".kinetic-word");
+            let currentIndex = 0;
+
+            const updateWords = () => {
+                words.forEach((word, i) => {
+                    if (i === currentIndex) {
+                        word.setAttribute("data-active", "true");
+                    } else if (
+                        i ===
+                        (currentIndex - 1 + words.length) % words.length
+                    ) {
+                        word.setAttribute("data-active", "prev");
+                    } else {
+                        word.setAttribute("data-active", "false");
+                    }
+                });
+            };
+
+            // Initial state
+            updateWords();
+
+            // Cycle
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % words.length;
+                updateWords();
+            }, 3000);
+        });
+    }
+
+    // Handle View Transitions
+    document.addEventListener("astro:page-load", initKineticText);
+</script>

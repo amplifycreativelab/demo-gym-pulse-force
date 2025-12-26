@@ -1,0 +1,97 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ScheduleFilter from "../../components/ScheduleFilter.tsx";
+import { classes } from "../../data/classes";
+import { trainers } from "../../data/content";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<MainLayout
+    title="Forge Schedule | PulseForge Gym"
+    description="View our full schedule of Strength, HIIT, Recovery, and Yoga sessions. Filter by day, trainer, or intensity."
+>
+    <Header slot="header" />
+
+    <section class="pt-40 pb-20 relative overflow-hidden">
+        <div
+            class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,_var(--color-flux)_0%,_transparent_30%)] opacity-5"
+        >
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="mb-16">
+                <h1
+                    class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6"
+                >
+                    The <span class="text-volt">Schedule</span>
+                </h1>
+                <p class="text-muted text-lg max-w-2xl">
+                    High-performance training windows designed for the modern
+                    athlete. Pick your threshold and join the forge.
+                </p>
+            </div>
+
+            {
+                (
+                    <ScheduleFilter
+                        client:load
+                        initialClasses={classes}
+                        trainers={trainers}
+                    />
+                )
+            }
+        </div>
+    </section>
+
+    <!-- Quick Info -->
+    <section class="py-20 bg-armor/30 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left"
+            >
+                <div>
+                    <h4
+                        class="font-heading font-black text-white uppercase text-sm mb-3"
+                    >
+                        Trial Policy
+                    </h4>
+                    <p class="text-muted text-xs leading-relaxed">
+                        All classes are open to trial members except for
+                        'Extreme' intensity sessions. Contact us for specialized
+                        clearance.
+                    </p>
+                </div>
+                <div>
+                    <h4
+                        class="font-heading font-black text-white uppercase text-sm mb-3"
+                    >
+                        Booking Window
+                    </h4>
+                    <p class="text-muted text-xs leading-relaxed">
+                        Bookings open 48 hours in advance. Cancellation required
+                        4 hours prior to avoid a 'No Show' penalty.
+                    </p>
+                </div>
+                <div>
+                    <h4
+                        class="font-heading font-black text-white uppercase text-sm mb-3"
+                    >
+                        Private Forge
+                    </h4>
+                    <p class="text-muted text-xs leading-relaxed">
+                        1-on-1 performance coaching is available outside of
+                        class hours. See our <a
+                            href={`${base}trainers`}
+                            class="text-flux underline">Trainers</a
+                        > page for details.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</MainLayout>

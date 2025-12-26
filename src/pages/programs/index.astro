@@ -1,0 +1,144 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BentoGrid from "../../components/BentoGrid.astro";
+import { programs } from "../../data/content";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<MainLayout
+    title="Training Programs | PulseForge Gym"
+    description="Discover our specialized training programs: Force Strength, Pulse HIIT, and Flux Recovery."
+>
+    <Header slot="header" />
+
+    <section class="pt-40 pb-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-20 text-center max-w-3xl mx-auto">
+                <h1
+                    class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-8"
+                >
+                    The <span class="text-flux">Programs</span>
+                </h1>
+                <p class="text-muted text-lg">
+                    We don't just 'work out'. We follow engineered performance
+                    tracks designed to elicit specific physiological
+                    adaptations.
+                </p>
+            </div>
+
+            <BentoGrid programs={programs} />
+        </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="py-32 bg-armor/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div>
+                    <h2
+                        class="text-4xl font-black uppercase tracking-tighter mb-8 leading-tight"
+                    >
+                        Our Forge <span class="text-volt">Methodology</span>
+                    </h2>
+                    <div class="space-y-8">
+                        <div class="flex gap-6">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 bg-volt text-void font-black flex items-center justify-center rounded-sm"
+                            >
+                                01
+                            </div>
+                            <div>
+                                <h4
+                                    class="text-white font-black uppercase tracking-widest text-sm mb-2"
+                                >
+                                    Kinetic Assessment
+                                </h4>
+                                <p class="text-muted text-sm">
+                                    Every member starts with a fundamental
+                                    movement screening to identify power leaks
+                                    and injury risks.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 bg-volt text-void font-black flex items-center justify-center rounded-sm"
+                            >
+                                02
+                            </div>
+                            <div>
+                                <h4
+                                    class="text-white font-black uppercase tracking-widest text-sm mb-2"
+                                >
+                                    Load Management
+                                </h4>
+                                <p class="text-muted text-sm">
+                                    We use data-driven RPE and percentage-based
+                                    loading to ensure you're always training at
+                                    the right threshold.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 bg-volt text-void font-black flex items-center justify-center rounded-sm"
+                            >
+                                03
+                            </div>
+                            <div>
+                                <h4
+                                    class="text-white font-black uppercase tracking-widest text-sm mb-2"
+                                >
+                                    Recovery Integration
+                                </h4>
+                                <p class="text-muted text-sm">
+                                    Our programs embed active recovery days
+                                    ensuring you never burn out, always adapt.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div
+                        class="aspect-square bg-graphite border border-white/5 rounded-sm overflow-hidden flex items-center justify-center"
+                    >
+                        <div
+                            class="w-2/3 h-2/3 border-4 border-volt/20 flex items-center justify-center animate-pulse"
+                        >
+                            <svg
+                                class="w-24 h-24 text-volt"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute -bottom-10 -left-10 p-8 glass-dark border border-white/10 hidden md:block"
+                    >
+                        <span class="block text-volt font-black text-3xl"
+                            >98%</span
+                        >
+                        <span
+                            class="text-[10px] text-muted font-black uppercase tracking-widest"
+                            >Adaptation Rate</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</MainLayout>

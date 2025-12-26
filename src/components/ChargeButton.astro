@@ -1,0 +1,33 @@
+---
+interface Props {
+    href?: string;
+    class?: string;
+    type?: "button" | "submit";
+    variant?: "primary" | "secondary";
+}
+
+const {
+    href,
+    class: className = "",
+    type = "button",
+    variant = "primary",
+} = Astro.props;
+
+const baseStyles = "charge-button charge-effect rounded-sm text-sm";
+const variantStyles =
+    variant === "primary"
+        ? "bg-volt text-void"
+        : "bg-transparent border-white/20 text-white hover:bg-white/10";
+---
+
+{
+    href ? (
+        <a href={href} class:list={[baseStyles, variantStyles, className]}>
+            <slot />
+        </a>
+    ) : (
+        <button type={type} class:list={[baseStyles, variantStyles, className]}>
+            <slot />
+        </button>
+    )
+}

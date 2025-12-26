@@ -1,0 +1,138 @@
+---
+import "../styles/global.css";
+import "../styles/base.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import MobileActionBar from "../components/MobileActionBar.astro";
+import { ViewTransitions } from "astro:transitions";
+
+interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    canonicalURL?: URL | string;
+}
+
+const {
+    title = "PulseForge Gym | Elite Performance Training",
+    description = "High-intensity kinetic science meets unrelenting discipline. Perth's premier facility for Strength, HIIT, and Recovery.",
+    image = undefined,
+    canonicalURL = new URL(Astro.url.pathname, Astro.site),
+} = Astro.props;
+
+import defaultOgImage from "../assets/images/og-image.webp";
+const finalImage = image || defaultOgImage.src;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <!-- Global Metadata -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href={canonicalURL} />
+
+        <!-- Primary Meta Tags -->
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(finalImage, Astro.url)} />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={Astro.url} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta
+            property="twitter:image"
+            content={new URL(finalImage, Astro.url)}
+        />
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Sora:wght@400;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <ViewTransitions />
+
+        <!-- Local Business Schema -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "HealthClub",
+                "name": "PulseForge Gym",
+                "image": "https://amplifycreativelab.github.io/pulse-force-demo/og-image.jpg",
+                "@id": "https://amplifycreativelab.github.io/pulse-force-demo/",
+                "url": "https://amplifycreativelab.github.io/pulse-force-demo/",
+                "telephone": "+61 8 9222 3456",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "42 Forge Way",
+                    "addressLocality": "West Perth",
+                    "addressRegion": "WA",
+                    "postalCode": "6005",
+                    "addressCountry": "AU"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": -31.9482,
+                    "longitude": 115.845
+                },
+                "openingHoursSpecification": [
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": [
+                            "Monday",
+                            "Tuesday",
+                            "Wednesday",
+                            "Thursday",
+                            "Friday"
+                        ],
+                        "opens": "05:00",
+                        "closes": "21:00"
+                    },
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": "Saturday",
+                        "opens": "07:00",
+                        "closes": "18:00"
+                    },
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": "Sunday",
+                        "opens": "08:00",
+                        "closes": "16:00"
+                    }
+                ],
+                "sameAs": [
+                    "https://instagram.com/pulseforgeperth",
+                    "https://facebook.com/pulseforgeperth"
+                ]
+            }
+        </script>
+    </head>
+    <body
+        class="bg-void text-text-primary font-body selection:bg-volt selection:text-void"
+    >
+        <slot name="header" />
+        <main>
+            <slot />
+        </main>
+        <slot name="footer" />
+
+        <MobileActionBar />
+    </body>
+</html>
