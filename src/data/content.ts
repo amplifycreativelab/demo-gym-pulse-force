@@ -7,13 +7,17 @@ import alexImg from "../assets/images/trainers/alex.webp";
 import sarahImg from "../assets/images/trainers/sarah.webp";
 import jaxImg from "../assets/images/trainers/jax.webp";
 
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+
 export const programs = [
     {
         id: "strength",
         title: "Forge Strength",
         description: "Progressive overload meets kinetic science. Build explosive power and functional mass.",
         image: strengthImg,
-        href: "/programs/strength",
+        href: `${base}programs/strength`,
         color: "#D4FF00",
     },
     {
@@ -21,7 +25,7 @@ export const programs = [
         title: "Pulse HIIT",
         description: "High-intensity metabolic conditioning designed to incinerate body fat and push VO2 Max.",
         image: hiitImg,
-        href: "/programs/hiit",
+        href: `${base}programs/hiit`,
         color: "#2EFF7B",
     },
     {
@@ -29,7 +33,7 @@ export const programs = [
         title: "Flux Recovery",
         description: "Active recovery, mobility, and soft tissue work to ensure you're always ready for the next session.",
         image: recoveryImg,
-        href: "/programs/recovery",
+        href: `${base}programs/recovery`,
         color: "#00E0FF",
     },
 ].map(p => ProgramSchema.parse(p));

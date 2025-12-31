@@ -1,0 +1,215 @@
+---
+import { Image } from "astro:assets";
+
+import ChargeButton from "../../components/ChargeButton.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+import { programs } from "../../data/content";
+import type { Program } from "../../data/schemas";
+
+export function getStaticPaths() {
+    return programs.map((program) => ({
+        params: { id: program.id },
+        props: { program },
+    }));
+}
+
+const { program } = Astro.props as { program: Program };
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+
+const detailsById: Record<
+    string,
+    { intensity: string; cadence: string; outcomes: string[]; includes: string[] }
+> = {
+    strength: {
+        intensity: "High",
+        cadence: "3-5 sessions / week",
+        outcomes: [
+            "Increase maximal strength and power output",
+            "Build functional mass with compound patterns",
+            "Improve resilience under load",
+        ],
+        includes: [
+            "Barbell + kettlebell strength cycles",
+            "Accessory work for weak-point repair",
+            "Coach-led technique refinement",
+        ],
+    },
+    hiit: {
+        intensity: "Extreme",
+        cadence: "2-4 sessions / week",
+        outcomes: [
+            "Raise VO2 max and anaerobic capacity",
+            "Improve work capacity under fatigue",
+            "Accelerate conditioning and body recomposition",
+        ],
+        includes: [
+            "Intervals, sled work, and metabolic circuits",
+            "Heart-rate guided progressions",
+            "Short, ruthless sessions",
+        ],
+    },
+    recovery: {
+        intensity: "Low-Moderate",
+        cadence: "1-3 sessions / week",
+        outcomes: [
+            "Reduce soreness and improve mobility",
+            "Increase tissue quality and joint control",
+            "Maintain performance across training blocks",
+        ],
+        includes: [
+            "Mobility flows + breathing protocols",
+            "Soft-tissue work and positional strength",
+            "Nervous system down-regulation",
+        ],
+    },
+};
+
+const detail = detailsById[program.id] ?? {
+    intensity: "Moderate",
+    cadence: "2-4 sessions / week",
+    outcomes: [],
+    includes: [],
+};
+---
+
+<MainLayout title={`${program.title} | PulseForge Gym`} description={program.description}>
+    <Header slot="header" />
+
+    <section class="pt-40 pb-24 relative overflow-hidden">
+        <div
+            class="absolute inset-0 opacity-20 pointer-events-none"
+            style={`background: radial-gradient(circle at 30% 20%, ${program.color}, transparent 55%)`}
+        >
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between gap-6 mb-10">
+                <a
+                    href={`${base}programs`}
+                    class="text-[10px] font-black uppercase tracking-[0.35em] text-muted hover:text-white transition-colors"
+                >
+                    &larr; Back to Programs
+                </a>
+                <span
+                    class="text-[10px] font-black uppercase tracking-[0.35em]"
+                    style={`color: ${program.color}`}
+                >
+                    Intensity: {detail.intensity}
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div>
+                    <h1
+                        class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6 leading-none"
+                    >
+                        {program.title}
+                    </h1>
+                    <p class="text-muted text-lg leading-relaxed mb-10">
+                        {program.description}
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 border-t border-white/5 pt-10 mb-10">
+                        <div>
+                            <span class="text-white font-black text-3xl block mb-2 tracking-tighter">
+                                {detail.intensity}
+                            </span>
+                            <span class="text-[10px] text-muted font-black uppercase tracking-widest">
+                                Intensity
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-white font-black text-3xl block mb-2 tracking-tighter">
+                                {detail.cadence}
+                            </span>
+                            <span class="text-[10px] text-muted font-black uppercase tracking-widest">
+                                Cadence
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <ChargeButton
+                            href={`${base}contact`}
+                            class="px-10 py-4 text-sm sm:text-base w-full sm:w-auto"
+                        >
+                            Book a Free Pass
+                        </ChargeButton>
+                        <a
+                            href={`${base}classes`}
+                            class="w-full sm:w-auto px-10 py-4 border border-white/10 text-white text-sm sm:text-base font-black uppercase tracking-widest hover:bg-white hover:text-void transition-all text-center"
+                        >
+                            View Schedule
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="aspect-[4/5] bg-armor border border-white/5 rounded-sm overflow-hidden">
+                        <Image
+                            src={program.image}
+                            alt={program.title}
+                            class="w-full h-full object-cover"
+                            width={900}
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-void via-void/40 to-transparent"></div>
+                    </div>
+                    <div class="absolute -bottom-10 -left-10 p-8 glass-dark border border-white/10 hidden md:block max-w-xs">
+                        <h4
+                            class="text-[10px] font-black uppercase tracking-[0.35em] mb-4"
+                            style={`color: ${program.color}`}
+                        >
+                            What You Get
+                        </h4>
+                        <ul class="space-y-3">
+                            {detail.includes.map((item) => (
+                                <li class="text-white text-sm font-bold uppercase tracking-tight">
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-armor/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-6 leading-tight">
+                        Targeted <span style={`color: ${program.color}`}>Outcomes</span>
+                    </h2>
+                    <p class="text-muted text-sm md:text-base leading-relaxed">
+                        Built as a concept demo, this page exists to support the internal navigation and show how a program detail route can look in the deployed build.
+                    </p>
+                </div>
+                <div class="glass-dark border border-white/10 p-10 rounded-sm">
+                    <ul class="space-y-5">
+                        {detail.outcomes.map((item, idx) => (
+                            <li class="flex gap-5">
+                                <div
+                                    class="flex-shrink-0 w-10 h-10 bg-void border border-white/10 flex items-center justify-center text-[10px] font-black"
+                                    style={`color: ${program.color}`}
+                                >
+                                    {(idx + 1).toString().padStart(2, "0")}
+                                </div>
+                                <div class="text-white font-bold uppercase tracking-tight text-sm leading-snug">
+                                    {item}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</MainLayout>
